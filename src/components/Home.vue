@@ -4,9 +4,18 @@
     <p>What is your name?</p>
     <div class="buttonGroup">
       <label for="name">
-        <input type="text" placeholder="your nickname" v-model="nickname" />
+        <input
+          type="text"
+          placeholder="your nickname"
+          v-model="nickname"
+          @keyup="error"
+        />
       </label>
-      <button>continue</button>
+      <button type="submit">
+        <router-link v-if="isActive" to="/userinterface">Continue</router-link>
+        <span v-else>Continue</span>
+      </button>
+
       <div class="error" v-if="error">
         {{ error }}
       </div>
@@ -19,10 +28,16 @@ import { ref, computed } from "vue";
 export default {
   setup() {
     let nickname = ref(null);
+    let activeLink = ref(false)
+
+    const isActive = computed(() => {
+      return nickname.value === null ? activeLink = false : nickname.value === "" ? activeLink = false : activeLink = true
+    })
+
     const error = computed(() => {
       return nickname.value === "" ? "The nickname is required" : "";
     });
-    return { nickname, error };
+    return { nickname, error,activeLink,isActive };
   },
 };
 </script>
