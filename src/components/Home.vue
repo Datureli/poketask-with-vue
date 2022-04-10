@@ -12,44 +12,32 @@
         />
       </label>
       <button type="submit">
-        <router-link class="activeStatus" v-if="isActive" to="/userinterface"
-          >Continue</router-link
-        >
+        <router-link class="activeStatus" v-if="isActive" to="/userinterface">Continue</router-link>
         <span v-else>Continue</span>
       </button>
 
       <div class="error" v-if="error">
         {{ error }}
       </div>
-      <UserInterface :key="nickname" :nickname="nickname" />
     </div>
   </div>
 </template>
 
 <script>
-import UserInterface from "./UserInterface.vue";
 import { ref, computed } from "vue";
 export default {
-  components: {
-    UserInterface,
-  },
   setup() {
     let nickname = ref(null);
-    let activeLink = ref(false);
+    let activeLink = ref(false)
 
     const isActive = computed(() => {
-      return nickname.value === null
-        ? (activeLink = false)
-        : nickname.value === ""
-        ? (activeLink = false)
-        : (activeLink = true);
-    });
+      return nickname.value === null ? activeLink = false : nickname.value === "" ? activeLink = false : activeLink = true
+    })
 
     const error = computed(() => {
       return nickname.value === "" ? "The nickname is required" : "";
     });
-
-    return { nickname, error, activeLink, isActive };
+    return { nickname, error,activeLink,isActive };
   },
 };
 </script>
@@ -65,7 +53,7 @@ export default {
   color: #ff0000;
 }
 .activeStatus {
-  text-decoration: none;
-  color: #008000;
+    text-decoration: none;
+    color: #008000;
 }
 </style>
