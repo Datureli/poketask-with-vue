@@ -12,13 +12,11 @@ export default {
   props: {
     modelValue: String,
   },
-  setup(props, { emit }) {
-    const welcome = computed(() => {
-      return props.nickname
-    });
+  setup() {
+     let { nickname,  } = useNickname()
     return {
       welcome,
-      nickname: useNickname(props, emit),
+      nickname
     };
   },
 };
