@@ -1,29 +1,24 @@
 <template>
   <div>
-    <h1>Welcome to your dashboard {{ welcome }}</h1>
-    <Pokemons />
+    <h1>Welcome to your dashboard {{ nickname }}</h1>
   </div>
 </template>
 
 <script>
-import Pokemons from './Pokemons.vue'
+//import Pokemons from './Pokemons.vue'
+import { useNickname } from "../composables/useNickname";
 import { computed } from "vue";
 export default {
-    components: {
-        Pokemons
-    },
   props: {
-    nickname: {
-      type: String,
-    },
+    modelValue: String,
   },
-  setup(props) {
-    let welcome = computed(() => {
-      return props.nickname;
+  setup(props, { emit }) {
+    const welcome = computed(() => {
+      return props.nickname
     });
-
     return {
       welcome,
+      nickname: useNickname(props, emit),
     };
   },
 };

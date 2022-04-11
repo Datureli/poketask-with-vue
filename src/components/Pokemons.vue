@@ -47,7 +47,7 @@ export default {
           state.pokemons.push(pokemon);
         });
       });
-
+    console.log(tryCatch)
     const tryCatch = () => {
       state.successOrNot = Math.floor(Math.random() * state.randomCatch.length);
     };

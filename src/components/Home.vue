@@ -20,26 +20,24 @@
         {{ error }}
       </div>
     </div>
+    
   </div>
 </template>
 
-<script>
-import { ref, computed } from "vue";
+<script >
+import { useNickname } from '../composables/useNickname'
 export default {
-  setup() {
-    let nickname = ref(null);
-    let activeLink = ref(false)
+  setup(){
+ let { nickname, isActive } = useNickname()
 
-    const isActive = computed(() => {
-      return nickname.value === null ? activeLink = false : nickname.value === "" ? activeLink = false : activeLink = true
-    })
+ return {
+   nickname,
+   isActive
+ }
+  }
+}
+  
 
-    const error = computed(() => {
-      return nickname.value === "" ? "The nickname is required" : "";
-    });
-    return { nickname, error,activeLink,isActive };
-  },
-};
 </script>
 
 <style>
