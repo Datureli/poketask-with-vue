@@ -4,7 +4,8 @@
       <li v-for="(pokemon, index) in pokemons" :key="index">
         <h2>{{ pokemon.name }}</h2>
         <img :src="imageUrl + pokemon.id + '.png'" alt="pokemon image" />
-        <p v-if="Math.random() < 0.5">{{ succesCatch }}</p>
+        <p v-if="!startCatching"></p>
+        <p v-else-if="Math.random() < 0.5">{{ succesCatch }}</p>
         <p v-else>{{ failCatch }}</p>
       </li>
     </ul>
@@ -29,6 +30,8 @@ export default {
       failCatch: "failure!",
       successOrNot: null,
       randomCatch: ["Congratulation", "failure"],
+      startCatching: false,
+
     });
 
     fetch("https://pokeapi.co/api/v2/pokemon?limit=5&offset=[50]")
@@ -48,8 +51,10 @@ export default {
         });
       });
     console.log(tryCatch)
+
     const tryCatch = () => {
       state.successOrNot = Math.floor(Math.random() * state.randomCatch.length);
+      state.startCatching = true
     };
     const catchResult = computed(() => {
       return state.randomCatch[state.successOrNot] || null;

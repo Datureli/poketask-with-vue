@@ -28,11 +28,12 @@
 import { useNickname } from '../composables/useNickname'
 export default {
   setup(){
- let { nickname, isActive } = useNickname()
+ let { nickname, isActive,error } = useNickname()
 
  return {
    nickname,
-   isActive
+   isActive,
+   error
  }
   }
 }
