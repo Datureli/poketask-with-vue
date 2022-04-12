@@ -1,6 +1,8 @@
 import { reactive, toRefs, computed } from "vue";
-
+import { useNickname } from './useNickname'
+let { calculateOffSet  } = useNickname()
 export function usePokemons() {
+
     const state = reactive({
         pokemons: [],
         imageUrl:
@@ -13,7 +15,7 @@ export function usePokemons() {
         startCatching: false,
       });
     
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=5&offset=[5]")
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=5&offset=${calculateOffSet.value}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -35,7 +37,7 @@ export function usePokemons() {
     state.startCatching = true;
   };
   const catchResult = computed(() => {
-    return state.randomCatch[state.successOrNot] || null;
+    return state.randomCatch[state.successOrNot]
   });
 
   return { ...toRefs(state), catchResult, tryCatch };
