@@ -14,10 +14,14 @@ export function useNickname() {
   const error = computed(() => {
     return nickname.value === "" ? "The nickname is required" : "";
   });
-
-  const refresh = computed(() => {
-    return nickname
+  
+  const nicknameLength = computed(() => {
+   if(nickname.value) {
+     return nickname.value.length
+   }
+   return ''
   })
 
-  return { nickname, activeLink, isActive, error,refresh };
+
+  return { nickname, activeLink, isActive, error,nicknameLength };
 }

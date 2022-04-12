@@ -11,56 +11,23 @@
     </ul>
 
     <button @click="tryCatch">Catch'em</button>
-      <p style="color: transparent">{{ successOrNot }}</p>  
+    <p style="color: transparent">{{ successOrNot }}</p>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs, computed } from "vue";
-
+import { usePokemons } from "../composables/usePokemons";
 export default {
   name: "Home",
   setup() {
-    const state = reactive({
-      pokemons: [],
-      imageUrl:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
-      nextUrl: "",
-      succesCatch: "Congratulation!",
-      failCatch: "failure!",
-      successOrNot: null,
-      randomCatch: ["Congratulation", "failure"],
-      startCatching: false,
-
-    });
-
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=5&offset=[50]")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        state.nextUrl = data.next;
-        data.results.forEach((pokemon) => {
-          pokemon.id = pokemon.url
-            .split("/")
-            .filter(function (url) {
-              return !!url;
-            })
-            .pop();
-
-          state.pokemons.push(pokemon);
-        });
-      });
-    console.log(tryCatch)
-
-    const tryCatch = () => {
-      state.successOrNot = Math.floor(Math.random() * state.randomCatch.length);
-      state.startCatching = true
+    let { catchResult, tryCatch,imageUrl,nextUrl, ...toRefs } = usePokemons();
+    return {
+      ...toRefs,
+      catchResult,
+      tryCatch,
+      imageUrl,
+      nextUrl
     };
-    const catchResult = computed(() => {
-      return state.randomCatch[state.successOrNot] || null;
-    });
-
-    return { ...toRefs(state), catchResult, tryCatch };
   },
 };
 </script>
