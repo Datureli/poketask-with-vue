@@ -15,7 +15,7 @@
         <router-link class="activeStatus" v-if="isActive" to="/userinterface">Continue</router-link>
         <span v-else>Continue</span>
       </button>
-{{nicknameLength}}
+{{nicknameLength}}    {{ calculateOffSet}}
       <div class="error" v-if="error">
         {{ error }}
       </div>
@@ -28,13 +28,14 @@
 import { useNickname } from '../composables/useNickname'
 export default {
   setup(){
- let { nickname, isActive,error,nicknameLength } = useNickname()
+ let { nickname, isActive,error,nicknameLength, calculateOffSet } = useNickname()
 
  return {
    nickname,
    isActive,
    error,
-   nicknameLength
+   nicknameLength,
+   calculateOffSet
  }
   }
 }

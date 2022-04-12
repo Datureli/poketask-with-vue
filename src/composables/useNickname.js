@@ -21,7 +21,9 @@ export function useNickname() {
    }
    return ''
   })
+  const calculateOffSet = computed(() => {
+  return  nicknameLength.value * 10
+  })
 
-
-  return { nickname, activeLink, isActive, error,nicknameLength };
+  return { nickname, activeLink, isActive, error,nicknameLength,calculateOffSet };
 }
