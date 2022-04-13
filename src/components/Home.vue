@@ -12,32 +12,31 @@
         />
       </label>
       <button type="submit">
-        <router-link class="activeStatus" v-if="isActive" to="/userinterface">Continue</router-link>
+        <router-link class="activeStatus" v-if="isActive" to="/userinterface"
+          >Continue</router-link
+        >
         <span v-else>Continue</span>
       </button>
       <div class="error" v-if="error">
         {{ error }}
       </div>
     </div>
-    
   </div>
 </template>
 
-<script >
-import { useNickname } from '../composables/useNickname'
+<script>
+import { useNickname } from "../composables/useNickname";
 export default {
-  setup(){
- let { nickname, isActive,error, } = useNickname()
+  setup() {
+    let { nickname, isActive, error } = useNickname();
 
- return {
-   nickname,
-   isActive,
-   error,
- }
-  }
-}
-  
-
+    return {
+      nickname,
+      isActive,
+      error,
+    };
+  },
+};
 </script>
 
 <style>
@@ -51,7 +50,7 @@ export default {
   color: #ff0000;
 }
 .activeStatus {
-    text-decoration: none;
-    color: #008000;
+  text-decoration: none;
+  color: #008000;
 }
 </style>
