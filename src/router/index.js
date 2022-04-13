@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../components/Home";
-import UserInterface from "../components/UserInterface";
 
 const routerHistory = createWebHistory();
 const router = createRouter({
@@ -8,12 +6,12 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: Home,
+      component: () => import("../components/Home.vue"),
     },
     {
       name: "UserInterface",
       path: "/userinterface",
-      component: UserInterface,
+      component: () => import("../components/UserInterface"),
     },
   ],
 });

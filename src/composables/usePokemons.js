@@ -19,7 +19,6 @@ export function usePokemons() {
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       state.nextUrl = data.next;
       data.results.forEach((pokemon) => {
         pokemon.id = pokemon.url
