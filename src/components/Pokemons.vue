@@ -20,13 +20,13 @@ import { usePokemons } from "../composables/usePokemons";
 export default {
   name: "Home",
   setup() {
-    let { catchResult, tryCatch,imageUrl,nextUrl, ...toRefs } = usePokemons();
+    let { catchResult, tryCatch, imageUrl, nextUrl, ...toRefs } = usePokemons();
     return {
       ...toRefs,
       catchResult,
       tryCatch,
       imageUrl,
-      nextUrl
+      nextUrl,
     };
   },
 };
